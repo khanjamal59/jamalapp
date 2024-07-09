@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import pydeck as pdk
 import plotly.express as px
 import seaborn as sns
@@ -180,6 +179,38 @@ def web_portfolio():
                      <div class="title fadeIn "style="text-align:left;">I am Jamal pursuing B.Tech CSE at Baddi University of Emerging Sciences & Technology,H.P. My journey into the world of artificial intelligence and machine learning began with a fascination for how these technologies can transform industries and improve lives.Beyond technical skills, I am committed to continuous learning and staying at the forefront of AI/ML advancements.In addition to my technical skills, I bring strong communication and problem-solving abilities to the table, allowing me to effectively collaborate with cross-functional teams and stakeholders. I am driven by a passion for innovation and a desire to make a meaningful impact through AI and machine learning. </div>
                      """,
           unsafe_allow_html=True)
+        st.markdown("""
+         <style>
+         .container {
+         width: 100%;
+         height: 100px;
+         background-color: #000;
+         position: relative;
+         overflow: hidden;
+             }
+     
+            .text {
+          position: reverse;
+           color: lime;
+          font-size: 50px;
+          transform: translateX(-100%);
+          white-space: nowrap;
+          animation: slide 15s linear infinite;
+         }
+    
+          @keyframes slide {
+          0% {
+             transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+            }
+           }
+          </style>
+           """, unsafe_allow_html=True)
+    
+        st.markdown('<div class="container"><div class="text">Welcome to my portfolio</div></div>', unsafe_allow_html=True)
+        st.markdown('<div class="container"><div class="text">Jamal Ahmad pursuing Bachelor in Computer Science Engineering </div></div>', unsafe_allow_html=True)
     if page=="Project":
         st.subheader("Welcome to Project page")
         st.write(f"""
@@ -264,18 +295,19 @@ def web_portfolio():
                  unsafe_allow_html=True)   
          # Sample data (replace with your own dataset)
          data = {
-                    'Institution name': ['Secondary School', 'Higher Secondary School', 'Bachelor\'s Degree'],
-            'Years': [2019, 2022, 2026]
+                    'Education level': ['Secondary School', 'Higher Secondary School', 'Bachelor\'s Degree'],
+            'Years': ['2019', '2022', '2026']
             }
-         sns.set(style='whitegrid')  # Set the style of the plot
-         plt.figure(figsize=(8, 6))  # Set the size of the plot
+         df = pd.DataFrame(data)
 
-            # Create the point plot
-         sns.pointplot(x='Years', y='Institution name', data=data, markers='^', color='blue')
+         # Display DataFrame
+         st.write('## Data')
+         st.write(df)
 
-          # Customize labels and title
-         plt.xlabel('Year Of Graduation',fontsize=16,color='purple')
-         st.pyplot(plt)
+            # Plotly Express bar chart for Years
+         st.write('###  Years of Graduation by level of education')
+         fig = px.bar(df, x='Education level', y='Years', color='Years', )
+         st.plotly_chart(fig)
          st.write(f"""
                 <div class=
                 "title"=style="text-align:left">
